@@ -5,40 +5,65 @@
 
 const contacts = {
     allContacts:[],
+    gerenateId:()=>{
+        return Date.now().toString(36) + Math.random().toString(36).substring(2)
+    },
     addContacts:(n,e,p,add)=>{
     const newContact={
-        name:n,
+        id:contacts.gerenateId(),
+        name1:n,
         email:e,
         phone:p,
         address:add
         }
         console.log(newContact);
-        this.allContacts.push(newContact);
-        console.log(this.allContacts);
-        displayContacts(this.allContacts);
+        contacts.allContacts.push(newContact);
+        console.log(contacts.allContacts);
+        displayContacts(contacts.allContacts);
     }
 }
+function displayContacts(array1){
+    result = document.getElementById("result");
+        result.innerHTML='',
+        console.log(array1);
+        array1.forEach(element=>{
+        console.log(element);
+        newCard = document.createElement('div');
+         newCard.className = 'card';
 
-function showContacts(){
-    contacts.allContacts.forEach(element=>{
-        list = document.createElement(div);
-        list.innerHTMl = `
-                            <h3>${element.name}</h3>
-                            <h2>${element.email}</h2>
-                            <div><span>${element.phone}</span><span>${element.address}</span></div>
-        `
+         newCard.innerHTML = `<div class="card-body">
+                            <h5 class="card-title>${element.name1}</h5>
+                            <p class="card-text">${element.email}</p>
+                            <p  class="card-text">${element.address}</p>
+                            <button class="btn btn-primary">Edit</button>
+                            <button class="btn btn-primary">Delete</button>
+        `;
+        console.log(element.name1);
+        // newCard.appendChild(list);
+        result.appendChild(newCard);
     })
 }
-
-
 contacts.addContacts('vijay','vijay@gmail.com',123456789,'Pune');
 contacts.addContacts('nisha','nisha@gmail.com',678912345,'Pune');
+// displayContacts(contacts.allContacts);
+
 
 document.getElementById('sbmitBTN').addEventListener('click',()=>{
-name = document.getElementById('nameInput').value; 
-email = document.getElementById('emailInput').value;
-phone = document.getElementById('phoneInput').value;
-address = document.getElementById('addressInput').value; 
+    nameInput = document.getElementById('nameInput'); 
+    emailInput = document.getElementById('emailInput');
+    phoneInput = document.getElementById('phoneInput');
+    addressInput = document.getElementById('addressInput'); 
 
-contacts.addContacts(name,email,phone,address);
+
+name1 = nameInput.value;
+email =emailInput.value;
+phone = phoneInput.value;
+address = addressInput.value;
+contacts.addContacts(name1,email,phone,address);
+
+nameInput.value = "";
+emailInput.value="";
+phoneInput.value="";
+addressInput.value="";
+
 })
