@@ -47,17 +47,24 @@ function displayContacts(array1){
         console.log(array1);
         array1.forEach(element=>{
         console.log(element);
-        newCard = document.createElement('div');
-         newCard.className = 'card';
+        // newCard = document.createElement('div');
+        //  newCard.className = 'card';
+        //  newCard.style.width = '14rem';
 
-         newCard.innerHTML = `<div class="card-body">
+        newCard = document.createElement('div');
+         newCard.className = 'col-3';
+        //  newCard.style.width = '14rem';
+
+         newCard.innerHTML = `<div class="card" style="width:14rem">
+                            <div class="card-body">
                             <h4 class="card-title">${element.name1}</h4>
                             <p class="card-text">${element.email}</p>
                             <p  class="card-text">${element.address}</p>
                             <p class="card-text">${element.phone}</p>
                             <button class="btn btn-primary" onclick=contacts.updateContact('${element.id}')>Edit</button>
                             <button class="btn btn-primary" onClick=contacts.deleteContact('${element.id}')>Delete</button>
-        `;
+                            </div>
+                            `;
         console.log(element.name1);
         // newCard.appendChild(list);
         result.appendChild(newCard);
@@ -65,6 +72,9 @@ function displayContacts(array1){
 }
 contacts.addContacts('vijay','vijay@gmail.com',123456789,'Pune');
 contacts.addContacts('nisha','nisha@gmail.com',678912345,'Pune');
+contacts.addContacts('nisha','nisha@gmail.com',678912345,'Pune');
+contacts.addContacts('nisha','nisha@gmail.com',678912345,'Pune');
+
 // displayContacts(contacts.allContacts);
 
 
