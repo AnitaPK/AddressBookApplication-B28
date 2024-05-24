@@ -20,6 +20,25 @@ const contacts = {
         contacts.allContacts.push(newContact);
         console.log(contacts.allContacts);
         displayContacts(contacts.allContacts);
+    },
+    deleteContact:(id)=>{
+        indexNo = contacts.allContacts.findIndex((elm)=>elm.id === id);
+
+        if(indexNo != -1){
+            contacts.allContacts.splice(indexNo,1);
+        }
+        displayContacts(contacts.allContacts);
+    },
+    updateContact:(updateid)=>{
+        console.log(updateid);
+        updatePhoneNumber = prompt("Enter Updated Phoe Number...");
+        console.log(updatePhoneNumber);
+        for(let i=0; i<contacts.allContacts.length; i++){
+            if(contacts.allContacts[i].id == updateid){
+               contacts.allContacts[i].phone = updatePhoneNumber;
+            }
+        }
+        displayContacts(contacts.allContacts);
     }
 }
 function displayContacts(array1){
@@ -32,11 +51,12 @@ function displayContacts(array1){
          newCard.className = 'card';
 
          newCard.innerHTML = `<div class="card-body">
-                            <h5 class="card-title>${element.name1}</h5>
+                            <h4 class="card-title">${element.name1}</h4>
                             <p class="card-text">${element.email}</p>
                             <p  class="card-text">${element.address}</p>
-                            <button class="btn btn-primary">Edit</button>
-                            <button class="btn btn-primary">Delete</button>
+                            <p class="card-text">${element.phone}</p>
+                            <button class="btn btn-primary" onclick=contacts.updateContact('${element.id}')>Edit</button>
+                            <button class="btn btn-primary" onClick=contacts.deleteContact('${element.id}')>Delete</button>
         `;
         console.log(element.name1);
         // newCard.appendChild(list);
@@ -53,8 +73,7 @@ document.getElementById('sbmitBTN').addEventListener('click',()=>{
     emailInput = document.getElementById('emailInput');
     phoneInput = document.getElementById('phoneInput');
     addressInput = document.getElementById('addressInput'); 
-
-
+    
 name1 = nameInput.value;
 email =emailInput.value;
 phone = phoneInput.value;
